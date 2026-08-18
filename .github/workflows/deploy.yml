@@ -22,17 +22,17 @@ jobs:
         run: |
           docker build \
             -f ToDoList/src/ToDoList.Api/Dockerfile \
-            -t bunyodmusayev/todolist-api:latest \
+            -t erkinbee/todolist-api:latest \
             ToDoList
-          docker push bunyodmusayev/todolist-api:latest
+          docker push erkinbee/todolist-api:latest
 
       - name: Build & push Blazor image
         run: |
           docker build \
             -f ToDoList/src/ToDoList.BlazorUI/Dockerfile \
-            -t bunyodmusayev/todolist-blazor:latest \
+            -t erkinbee/todolist-blazor:latest \
             ToDoList
-          docker push bunyodmusayev/todolist-blazor:latest
+          docker push erkinbee/todolist-blazor:latest
 
   deploy:
     needs: build-and-push
@@ -45,7 +45,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            cd /opt/todolist
+            cd /root/todolist
             docker compose pull
             docker compose up -d
             docker image prune -f
